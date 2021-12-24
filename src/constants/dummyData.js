@@ -1,4 +1,4 @@
-export const dummyData = [
+export const allbanks_dummyData = [
   {
     ifsc: 'ABHY0065001',
     bank_id: 60,
