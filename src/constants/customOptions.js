@@ -1,4 +1,4 @@
-export const category = [
+export const categories = [
   { label: 'IFSC', value: 'ifsc' },
   { label: 'BANK ID', value: 'bank_id' },
   { label: 'DISTRICT', value: 'district' },
