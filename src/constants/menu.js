@@ -4,10 +4,12 @@ const Menu = [
   {
     name: 'All Banks',
     route: Routes.ALL_BANKS,
+    key: '0',
   },
   {
     name: 'Favorites',
     route: Routes.FAVORITES,
+    key: '0',
   },
 ];
 
