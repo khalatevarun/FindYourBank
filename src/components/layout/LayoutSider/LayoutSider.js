@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import logo from '../../../assets/groww_logo.png';
 import MenuKeys from '../../../constants/menu';
@@ -18,7 +19,7 @@ const LayoutSider = () => {
         {map(MenuKeys, (m, i) => {
           return (
             <Menu.Item key={`${i}`}>
-              <div>{get(m, 'name')}</div>
+              <Link to={get(m, 'route')}>{get(m, 'name')}</Link>
             </Menu.Item>
           );
         })}

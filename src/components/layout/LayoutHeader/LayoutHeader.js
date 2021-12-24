@@ -5,11 +5,7 @@ import './style.scss';
 const { Header } = Layout;
 
 const LayoutHeader = () => {
-  return (
-    <Header className="main-header">
-      <div>This is header</div>
-    </Header>
-  );
+  return <Header className="main-header"></Header>;
 };
 
 export default LayoutHeader;
