@@ -1,7 +1,8 @@
 import get from 'lodash/get';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { find, includes } from 'lodash';
-import { Popconfirm, message } from 'antd';
+import { find } from 'lodash';
+import { Popconfirm } from 'antd';
+import { Link } from 'react-router-dom';
 
 export const allbanksColumn = ({
   removeFromFavorites,
@@ -11,7 +12,11 @@ export const allbanksColumn = ({
   {
     title: 'Bank',
     key: 'bank_name',
-    render: (record) => <div>{get(record, 'bank_name')}</div>,
+    render: (record) => (
+      <Link to={`/bank-details/${get(record, 'ifsc')}`}>
+        {get(record, 'bank_name')}
+      </Link>
+    ),
   },
   {
     title: 'IFSC',

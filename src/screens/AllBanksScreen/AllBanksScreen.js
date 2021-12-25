@@ -19,19 +19,25 @@ import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
 
 const { Option } = Select;
-const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
+const AllBanksScreen = ({
+  userData,
+  addToFavorites,
+  removeFromFavorites,
+  banksData,
+  setBanksData,
+}) => {
   const [citySelected, setCitySelected] = useState('MUMBAI');
   const [loading, setLoading] = useState(false);
-  const [banksData, setBanksData] = useState({
-    initialData: [],
-    filteredData: [],
-  });
   const [categorySelected, setCategorySelected] = useState(null);
 
   const searchBanks = (query) => {
     let newData = filter(
       get(banksData, 'initialData'),
-      (bank) => includes(String(bank[categorySelected]), query) // BANK_ID needs to be converted to string for includes function to work
+      (bank) =>
+        includes(
+          String(bank[categorySelected]).toLowerCase(),
+          query.toLowerCase()
+        ) // BANK_ID needs to be converted to string for includes function to work
     );
     setBanksData({ ...banksData, filteredData: newData });
   };
