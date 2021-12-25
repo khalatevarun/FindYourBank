@@ -13,6 +13,11 @@ const AppRouter = () => {
     favorites: [],
   });
 
+  const [banksData, setBanksData] = useState({
+    initialData: [],
+    filteredData: [],
+  });
+
   const addToFavorites = (bankObj) => {
     setUserData({ favorites: [...get(userData, 'favorites'), bankObj] });
     message.success('Bank added to favorites.');
@@ -37,6 +42,8 @@ const AppRouter = () => {
         element={
           <AllBanksScreen
             userData={userData}
+            banksData={banksData}
+            setBanksData={setBanksData}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
           />
@@ -56,6 +63,7 @@ const AppRouter = () => {
         element={
           <BankDetailsScreen
             userData={userData}
+            banksData={banksData}
             addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
           />
