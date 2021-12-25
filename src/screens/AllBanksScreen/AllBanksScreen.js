@@ -13,6 +13,8 @@ import { allbanksColumn } from '../../constants/table/allbanksColumn';
 import { categories, cities } from '../../constants/customOptions';
 import map from 'lodash/map';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
+import includes from 'lodash/includes';
 import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
 
@@ -20,7 +22,19 @@ const { Option } = Select;
 const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
   const [citySelected, setCitySelected] = useState('MUMBAI');
   const [loading, setLoading] = useState(false);
-  const [banksData, setBanksData] = useState([]);
+  const [banksData, setBanksData] = useState({
+    initialData: [],
+    filteredData: [],
+  });
+  const [categorySelected, setCategorySelected] = useState(null);
+
+  const searchBanks = (query) => {
+    let newData = filter(
+      get(banksData, 'initialData'),
+      (bank) => includes(String(bank[categorySelected]), query) // BANK_ID needs to be converted to string for includes function to work
+    );
+    setBanksData({ ...banksData, filteredData: newData });
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -28,7 +42,7 @@ const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
       .then((result) => result.json())
       .then((data) => {
         setLoading(false);
-        setBanksData(data);
+        setBanksData({ initialData: data, filteredData: data });
       })
       .catch((e) => {
         setLoading(false);
@@ -53,7 +67,10 @@ const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
                   </Option>
                 ))}
               </Select>
-              <Select>
+              <Select
+                value={categorySelected}
+                onChange={(value) => setCategorySelected(value)}
+              >
                 {map(categories, (category, i) => (
                   <Option key={i} value={get(category, 'value')}>
                     {get(category, 'label')}
@@ -64,7 +81,12 @@ const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
           </Row>
         </Col>
         <Col span={6} pull={18}>
-          <Input placeholder="Search..." allowClear size="large" />
+          <Input
+            placeholder="Search on the basis of category selected..."
+            allowClear
+            size="large"
+            onChange={(e) => searchBanks(e.target.value)}
+          />
         </Col>
       </Row>
       <Table
@@ -73,7 +95,7 @@ const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
           removeFromFavorites,
           userData,
         })}
-        dataSource={banksData}
+        dataSource={get(banksData, 'filteredData')}
       />
     </Spin>
   );
