@@ -36,7 +36,18 @@ const AppRouter = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<AllBanksScreen />} />
+      <Route
+        path="/"
+        element={
+          <AllBanksScreen
+            userData={userData}
+            banksData={banksData}
+            setBanksData={setBanksData}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
+          />
+        }
+      />
       <Route
         path={ROUTES.ALL_BANKS}
         element={

@@ -17,6 +17,7 @@ import filter from 'lodash/filter';
 import includes from 'lodash/includes';
 import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
+import { myLocalStorage } from '../../utility/localStorageWrapper';
 
 const { Option } = Select;
 const AllBanksScreen = ({
@@ -45,16 +46,17 @@ const AllBanksScreen = ({
   useEffect(() => {
     setLoading(true);
     getAllBanksData(citySelected)
-      .then((result) => result.json())
       .then((data) => {
         setLoading(false);
         setBanksData({ initialData: data, filteredData: data });
+        myLocalStorage.setItem(citySelected, JSON.stringify(data), 10000);
       })
       .catch((e) => {
+        console.log(e);
         setLoading(false);
-        notification.error('Something went wrong');
+        notification.error({ message: 'Something went wrong' });
       });
-  }, [citySelected]);
+  }, [citySelected, setBanksData]);
 
   return (
     <Spin spinning={loading}>
