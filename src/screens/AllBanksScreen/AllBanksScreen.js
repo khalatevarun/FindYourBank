@@ -33,7 +33,11 @@ const AllBanksScreen = ({
   const searchBanks = (query) => {
     let newData = filter(
       get(banksData, 'initialData'),
-      (bank) => includes(String(bank[categorySelected]), query) // BANK_ID needs to be converted to string for includes function to work
+      (bank) =>
+        includes(
+          String(bank[categorySelected]).toLowerCase(),
+          query.toLowerCase()
+        ) // BANK_ID needs to be converted to string for includes function to work
     );
     setBanksData({ ...banksData, filteredData: newData });
   };
