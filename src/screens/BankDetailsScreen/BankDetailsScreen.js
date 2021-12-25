@@ -1,8 +1,9 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Space } from 'antd';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './style.scss';
 
 const BankDetailsScreen = (props) => {
   let { ifsc } = useParams();
@@ -19,11 +20,46 @@ const BankDetailsScreen = (props) => {
   return (
     <>
       <div className="screen-title">Bank Details</div>
-      <Row>
-        <Col></Col>
-        <Col></Col>
-        <Col></Col>
-      </Row>
+      <div className="bank_details_container">
+        <Row className="bank_details_row">
+          <Col span={8}>
+            <div className="bank_details_label">Name</div>
+            <div>{get(currentBankObject, 'bank_name')}</div>
+          </Col>
+          <Col span={8}>
+            <div className="bank_details_label">BRANCH</div>
+            <div>{get(currentBankObject, 'branch')}</div>
+          </Col>
+          <Col span={8}>
+            <div className="bank_details_label">ID</div>
+            <div>{get(currentBankObject, 'bank_id')}</div>
+          </Col>
+        </Row>
+        <Row className="bank_details_row">
+          <Col span={8}>
+            <div className="bank_details_label">IFSC</div>
+            <div>{get(currentBankObject, 'ifsc')}</div>
+          </Col>
+          <Col span={8}>
+            <div className="bank_details_label">CITY</div>
+            <div>{get(currentBankObject, 'city')}</div>
+          </Col>
+          <Col span={8}>
+            <div className="bank_details_label">DISTRICT</div>
+            <div>{get(currentBankObject, 'district')}</div>
+          </Col>
+        </Row>
+        <Row className="bank_details_row">
+          <Col span={8}>
+            <div className="bank_details_label">STATE</div>
+            <div>{get(currentBankObject, 'state')}</div>
+          </Col>
+          <Col span={8}>
+            <div className="bank_details_label">ADDRESS</div>
+            <div>{get(currentBankObject, 'address')}</div>
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };
