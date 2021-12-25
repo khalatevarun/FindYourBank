@@ -9,17 +9,15 @@ import {
   Input,
   notification,
 } from 'antd';
-import { allbanks_dummyData } from '../../constants/dummyData';
 import { allbanksColumn } from '../../constants/table/allbanksColumn';
 import { categories, cities } from '../../constants/customOptions';
 import map from 'lodash/map';
 import get from 'lodash/get';
 import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
-import { result } from 'lodash';
 
 const { Option } = Select;
-const AllBanksScreen = () => {
+const AllBanksScreen = ({ userData, addToFavorites, removeFromFavorites }) => {
   const [citySelected, setCitySelected] = useState('MUMBAI');
   const [loading, setLoading] = useState(false);
   const [banksData, setBanksData] = useState([]);
@@ -69,7 +67,14 @@ const AllBanksScreen = () => {
           <Input placeholder="Search..." allowClear size="large" />
         </Col>
       </Row>
-      <Table columns={allbanksColumn()} dataSource={banksData} />
+      <Table
+        columns={allbanksColumn({
+          addToFavorites,
+          removeFromFavorites,
+          userData,
+        })}
+        dataSource={banksData}
+      />
     </Spin>
   );
 };
