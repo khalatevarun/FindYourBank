@@ -1,4 +1,4 @@
-const FavoritesScreen = () => {
+const FavoritesScreen = ({ userData, setUserData }) => {
   return <div>Favorites Screen</div>;
 };
 
