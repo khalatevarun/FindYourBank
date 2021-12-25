@@ -1,5 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Col, Row, Select, Space, Spin, Table, Input } from 'antd';
+import {
+  Col,
+  Row,
+  Select,
+  Space,
+  Spin,
+  Table,
+  Input,
+  notification,
+} from 'antd';
 import { allbanks_dummyData } from '../../constants/dummyData';
 import { allbanksColumn } from '../../constants/table/allbanksColumn';
 import { categories, cities } from '../../constants/customOptions';
@@ -12,37 +21,44 @@ import { result } from 'lodash';
 const { Option } = Select;
 const AllBanksScreen = () => {
   const [citySelected, setCitySelected] = useState('MUMBAI');
+  const [loading, setLoading] = useState(false);
   const [banksData, setBanksData] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     getAllBanksData(citySelected)
       .then((result) => result.json())
       .then((data) => {
-        console.log(data);
+        setLoading(false);
         setBanksData(data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setLoading(false);
+        notification.error('Something went wrong');
+      });
   }, [citySelected]);
 
   return (
-    <Spin spinning={false}>
+    <Spin spinning={loading}>
       <div className="screen-title">All Banks</div>
       <Row className="search-bar">
         <Col span={18} push={6}>
           <Row align="end">
             <Space>
+              <Select
+                value={citySelected}
+                onChange={(value) => setCitySelected(value)}
+              >
+                {map(cities, (city, i) => (
+                  <Option key={i} value={get(city, 'value')}>
+                    {get(city, 'label')}
+                  </Option>
+                ))}
+              </Select>
               <Select>
                 {map(categories, (category, i) => (
                   <Option key={i} value={get(category, 'value')}>
                     {get(category, 'label')}
-                  </Option>
-                ))}
-              </Select>
-
-              <Select>
-                {map(cities, (city, i) => (
-                  <Option key={i} value={get(city, 'value')}>
-                    {get(city, 'label')}
                   </Option>
                 ))}
               </Select>
