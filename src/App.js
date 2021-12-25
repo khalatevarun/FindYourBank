@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Button, Layout } from 'antd';
+import { Layout } from 'antd';
 import './App.css';
 import LayoutHeader from './components/layout/LayoutHeader/LayoutHeader';
 import LayoutSider from './components/layout/LayoutSider/LayoutSider';
