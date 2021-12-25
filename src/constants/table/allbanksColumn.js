@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import { find, includes } from 'lodash';
-import { Popconfirm, message } from 'antd';
+import { find } from 'lodash';
+import { Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 
 export const allbanksColumn = ({
