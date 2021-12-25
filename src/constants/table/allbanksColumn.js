@@ -1,6 +1,7 @@
 import get from 'lodash/get';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { find, includes } from 'lodash';
+import { Popconfirm, message } from 'antd';
 
 export const allbanksColumn = ({
   removeFromFavorites,
@@ -38,9 +39,15 @@ export const allbanksColumn = ({
     render: (record) => {
       if (find(get(userData, 'favorites'), record)) {
         return (
-          <HeartFilled
-            onClick={() => removeFromFavorites(get(record, 'ifsc'))}
-          />
+          <Popconfirm
+            title="Are you sure to remove the bank from favorites?"
+            onConfirm={() => removeFromFavorites(get(record, 'ifsc'))}
+            onCancel={() => null}
+            okText="Yes"
+            cancelText="No"
+          >
+            <HeartFilled />
+          </Popconfirm>
         );
       } else {
         return <HeartOutlined onClick={() => addToFavorites(record)} />;
