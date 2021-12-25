@@ -44,7 +44,7 @@ const BankDetailsScreen = (props) => {
         </div>
         <Row className="bank_details_row">
           <Col span={8}>
-            <div className="bank_details_label">Name</div>
+            <div className="bank_details_label">NAME</div>
             <div>{get(currentBankObject, 'bank_name')}</div>
           </Col>
           <Col span={8}>
@@ -52,7 +52,7 @@ const BankDetailsScreen = (props) => {
             <div>{get(currentBankObject, 'branch')}</div>
           </Col>
           <Col span={8}>
-            <div className="bank_details_label">ID</div>
+            <div className="bank_details_label">BANK ID</div>
             <div>{get(currentBankObject, 'bank_id')}</div>
           </Col>
         </Row>
