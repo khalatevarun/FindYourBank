@@ -44,7 +44,6 @@ const AppRouter = () => {
         element={
           <FavoritesScreen
             userData={userData}
-            addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
           />
         }
