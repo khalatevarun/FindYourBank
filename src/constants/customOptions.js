@@ -1,4 +1,5 @@
 export const categories = [
+  { label: 'Select Category', value: null },
   { label: 'IFSC', value: 'ifsc' },
   { label: 'BANK ID', value: 'bank_id' },
   { label: 'DISTRICT', value: 'district' },

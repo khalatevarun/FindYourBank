@@ -1,7 +1,6 @@
 import { Col, Row, Select, Space, Spin, Table, Input } from 'antd';
 import { allbanks_dummyData } from '../../constants/dummyData';
 import { allbanksColumn } from '../../constants/table/allbanksColumn';
-import { Radio } from 'antd';
 import { categories, cities } from '../../constants/customOptions';
 import map from 'lodash/map';
 import get from 'lodash/get';
