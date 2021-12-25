@@ -4,7 +4,6 @@ export const categories = [
   { label: 'IFSC', value: 'ifsc' },
   { label: 'BRANCH', value: 'branch' },
   { label: 'BANK ID', value: 'bank_id' },
-  { label: 'DISTRICT', value: 'district' },
 ];
 
 export const cities = [
