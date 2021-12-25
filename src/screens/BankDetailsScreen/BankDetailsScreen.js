@@ -1,4 +1,6 @@
-import { Col, Row, Space } from 'antd';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
+import { Col, Popconfirm, Row, Space } from 'antd';
+import { includes } from 'lodash';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import { useState } from 'react';
@@ -21,6 +23,25 @@ const BankDetailsScreen = (props) => {
     <>
       <div className="screen-title">Bank Details</div>
       <div className="bank_details_container">
+        <div className="bank_detais_icon">
+          {find(get(props, 'userData.favorites', currentBankObject)) ? (
+            <Popconfirm
+              title="Are you sure to remove the bank from favorites?"
+              onConfirm={() =>
+                props.removeFromFavorites(get(currentBankObject, 'ifsc'))
+              }
+              onCancel={() => null}
+              okText="Yes"
+              cancelText="No"
+            >
+              <HeartFilled />
+            </Popconfirm>
+          ) : (
+            <HeartOutlined
+              onClick={() => props.addToFavorites(currentBankObject)}
+            />
+          )}
+        </div>
         <Row className="bank_details_row">
           <Col span={8}>
             <div className="bank_details_label">Name</div>
