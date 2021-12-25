@@ -6,6 +6,7 @@ import FavoritesScreen from './screens/FavoritesScreen/FavoritesScreen';
 import BankDetailsScreen from './screens/BankDetailsScreen/BankDetailsScreen';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
+import { message } from 'antd';
 
 const AppRouter = () => {
   const [userData, setUserData] = useState({
@@ -14,6 +15,7 @@ const AppRouter = () => {
 
   const addToFavorites = (bankObj) => {
     setUserData({ favorites: [...get(userData, 'favorites'), bankObj] });
+    message.success('Bank added to favorites.');
   };
 
   const removeFromFavorites = (ifsc) => {
@@ -24,6 +26,7 @@ const AppRouter = () => {
     setUserData({
       favorites: newData,
     });
+    message.success('Bank removed from favorites.');
   };
 
   return (
@@ -44,7 +47,6 @@ const AppRouter = () => {
         element={
           <FavoritesScreen
             userData={userData}
-            addToFavorites={addToFavorites}
             removeFromFavorites={removeFromFavorites}
           />
         }
