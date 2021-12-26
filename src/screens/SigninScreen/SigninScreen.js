@@ -6,22 +6,39 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import {
+  collection,
+  setDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { useMyContext } from '../../utility/contextProvider/myContext';
+import { db } from '../../firebase';
 
 const auth = getAuth();
 
 function SigninScreen() {
-  const { setIsLoggedIn } = useMyContext();
+  const { setIsLoggedIn, setUserData } = useMyContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signIn = (event) => {
+  const signIn = async (event) => {
     event.preventDefault();
-
+    let userFavBanks = [];
     signInWithEmailAndPassword(auth, email, password)
-      .then((auth) => {
+      .then(async (auth) => {
         setIsLoggedIn(true);
+
+        const userFavRef = doc(db, 'users', auth.user.uid);
+        const docSnap = await getDoc(userFavRef);
+        if (docSnap.exists()) {
+          userFavBanks = JSON.parse(docSnap.data().favorites);
+        }
+        setUserData({ details: auth.user, favorites: userFavBanks });
       })
       .catch((error) => alert(error.message));
   };
@@ -29,7 +46,7 @@ function SigninScreen() {
   const signInAsGuest = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, 'test@gmail.com', 'password')
-      .then((auth) => {
+      .then(async (auth) => {
         setIsLoggedIn(true);
       })
       .catch((error) => alert(error.message));
