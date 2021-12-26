@@ -51,11 +51,16 @@ export const allbanksColumn = ({
             okText="Yes"
             cancelText="No"
           >
-            <HeartFilled />
+            <HeartFilled className="icon_medium" />
           </Popconfirm>
         );
       } else {
-        return <HeartOutlined onClick={() => addToFavorites(record)} />;
+        return (
+          <HeartOutlined
+            onClick={() => addToFavorites(record)}
+            className="icon_medium"
+          />
+        );
       }
     },
   },

@@ -7,10 +7,7 @@ const { Header } = Layout;
 const LayoutHeader = () => {
   return (
     <Header className="main-header">
-      <div>Welcome to Groww!</div>
-      <div>
-        Find the banks which best suit your requirments within few clicks :)
-      </div>
+      <div className="header-title">Find Your Bank</div>
     </Header>
   );
 };
