@@ -1,13 +1,13 @@
-import { Col, Row, Select, Space, Spin, Table } from 'antd';
+import { Table } from 'antd';
 import { allbanksColumn } from '../../constants/table/allbanksColumn';
 import get from 'lodash/get';
-import { useState } from 'react';
+import { useMyContext } from '../../utility/contextProvider/myContext';
 
-const FavoritesScreen = ({ userData, removeFromFavorites }) => {
-  const [loading, setLoading] = useState(false);
+const FavoritesScreen = () => {
+  const { userData, removeFromFavorites } = useMyContext();
 
   return (
-    <Spin spinning={loading}>
+    <>
       <div className="screen-title">Favorites</div>
       <Table
         columns={allbanksColumn({
@@ -16,7 +16,7 @@ const FavoritesScreen = ({ userData, removeFromFavorites }) => {
         })}
         dataSource={get(userData, 'favorites')}
       />
-    </Spin>
+    </>
   );
 };
 export default FavoritesScreen;

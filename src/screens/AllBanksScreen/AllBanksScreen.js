@@ -18,18 +18,29 @@ import includes from 'lodash/includes';
 import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
 import { myLocalStorage } from '../../utility/localStorageWrapper';
+import { useMyContext } from '../../utility/contextProvider/myContext';
 
 const { Option } = Select;
-const AllBanksScreen = ({
-  userData,
-  addToFavorites,
-  removeFromFavorites,
-  banksData,
-  setBanksData,
-}) => {
+const AllBanksScreen = () => {
   const [citySelected, setCitySelected] = useState('MUMBAI');
   const [loading, setLoading] = useState(false);
   const [categorySelected, setCategorySelected] = useState(null);
+
+  const {
+    userData,
+    addToFavorites,
+    removeFromFavorites,
+    banksData,
+    setBanksData,
+  } = useMyContext();
+
+  console.log({
+    userData,
+    addToFavorites,
+    removeFromFavorites,
+    banksData,
+    setBanksData,
+  });
 
   const searchBanks = (query) => {
     let newData = filter(

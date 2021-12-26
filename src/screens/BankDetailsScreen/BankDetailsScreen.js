@@ -4,27 +4,35 @@ import find from 'lodash/find';
 import get from 'lodash/get';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useMyContext } from '../../utility/contextProvider/myContext';
 import './style.scss';
 
-const BankDetailsScreen = (props) => {
+const BankDetailsScreen = () => {
   let { ifsc } = useParams();
 
-  const [currentBankObject, setCurrentObject] = useState(
-    find(get(props, 'banksData.initialData'), function (bank) {
+  const { addToFavorites, removeFromFavorites, banksData, userData } =
+    useMyContext();
+
+  const currentBankObject = find(
+    get(banksData, 'initialData'),
+    function (bank) {
       return get(bank, 'ifsc') === ifsc;
-    })
+    }
   );
 
+  console.log(userData);
   return (
     <>
       <div className="screen-title">Bank Details</div>
       <div className="bank_details_container">
         <div className="bank_detais_icon">
-          {find(get(props, 'userData.favorites', currentBankObject)) ? (
+          {find(get(userData, 'favorites'), function (bank) {
+            return get(bank, 'ifsc') === ifsc;
+          }) ? (
             <Popconfirm
               title="Are you sure to remove the bank from favorites?"
               onConfirm={() =>
-                props.removeFromFavorites(get(currentBankObject, 'ifsc'))
+                removeFromFavorites(get(currentBankObject, 'ifsc'))
               }
               onCancel={() => null}
               okText="Yes"
@@ -34,7 +42,7 @@ const BankDetailsScreen = (props) => {
             </Popconfirm>
           ) : (
             <HeartOutlined
-              onClick={() => props.addToFavorites(currentBankObject)}
+              onClick={() => addToFavorites(currentBankObject)}
               className="icon_medium"
             />
           )}
