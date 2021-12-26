@@ -8,15 +8,12 @@ import './style.scss';
 
 const BankDetailsScreen = (props) => {
   let { ifsc } = useParams();
-  console.log(ifsc);
 
   const [currentBankObject, setCurrentObject] = useState(
     find(get(props, 'banksData.initialData'), function (bank) {
       return get(bank, 'ifsc') === ifsc;
     })
   );
-
-
 
   return (
     <>
@@ -33,50 +30,67 @@ const BankDetailsScreen = (props) => {
               okText="Yes"
               cancelText="No"
             >
-              <HeartFilled />
+              <HeartFilled className="icon_medium" />
             </Popconfirm>
           ) : (
             <HeartOutlined
               onClick={() => props.addToFavorites(currentBankObject)}
+              className="icon_medium"
             />
           )}
         </div>
         <Row className="bank_details_row">
           <Col span={8}>
             <div className="bank_details_label">NAME</div>
-            <div>{get(currentBankObject, 'bank_name')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'bank_name')}
+            </div>
           </Col>
           <Col span={8}>
             <div className="bank_details_label">BRANCH</div>
-            <div>{get(currentBankObject, 'branch')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'branch')}
+            </div>
           </Col>
           <Col span={8}>
             <div className="bank_details_label">BANK ID</div>
-            <div>{get(currentBankObject, 'bank_id')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'bank_id')}
+            </div>
           </Col>
         </Row>
         <Row className="bank_details_row">
           <Col span={8}>
             <div className="bank_details_label">IFSC</div>
-            <div>{get(currentBankObject, 'ifsc')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'ifsc')}
+            </div>
           </Col>
           <Col span={8}>
             <div className="bank_details_label">CITY</div>
-            <div>{get(currentBankObject, 'city')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'city')}
+            </div>
           </Col>
           <Col span={8}>
             <div className="bank_details_label">DISTRICT</div>
-            <div>{get(currentBankObject, 'district')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'district')}
+            </div>
           </Col>
         </Row>
         <Row className="bank_details_row">
           <Col span={8}>
             <div className="bank_details_label">STATE</div>
-            <div>{get(currentBankObject, 'state')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'state')}
+            </div>
           </Col>
           <Col span={8}>
             <div className="bank_details_label">ADDRESS</div>
-            <div>{get(currentBankObject, 'address')}</div>
+            <div className="bank_details_value">
+              {get(currentBankObject, 'address')}
+            </div>
           </Col>
         </Row>
       </div>

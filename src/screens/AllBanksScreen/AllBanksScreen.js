@@ -52,7 +52,6 @@ const AllBanksScreen = ({
         myLocalStorage.setItem(citySelected, JSON.stringify(data), 10000);
       })
       .catch((e) => {
-        console.log(e);
         setLoading(false);
         notification.error({ message: 'Something went wrong' });
       });
