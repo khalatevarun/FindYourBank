@@ -30,7 +30,7 @@ const BankDetailsScreen = () => {
       } else {
         // link to  all bank details
         message.error(
-          'Please select a city and search for the bank with ifsc code'
+          'Please select a city and search for the bank with IFSC code'
         );
         navigate('/all-banks');
       }
