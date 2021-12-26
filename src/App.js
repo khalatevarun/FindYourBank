@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
-import './App.css';
+import './App.scss';
 import LayoutHeader from './components/layout/LayoutHeader/LayoutHeader';
 import LayoutSider from './components/layout/LayoutSider/LayoutSider';
 import AppRouter from './AppRouter';

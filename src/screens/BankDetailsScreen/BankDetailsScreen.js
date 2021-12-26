@@ -1,6 +1,5 @@
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
-import { Col, Popconfirm, Row, Space } from 'antd';
-import { includes } from 'lodash';
+import { Col, Popconfirm, Row } from 'antd';
 import find from 'lodash/find';
 import get from 'lodash/get';
 import { useState } from 'react';
@@ -17,7 +16,7 @@ const BankDetailsScreen = (props) => {
     })
   );
 
-  console.log(currentBankObject);
+
 
   return (
     <>
