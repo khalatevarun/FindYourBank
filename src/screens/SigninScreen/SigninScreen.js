@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Col, Row, Spin, Form, Input } from 'antd';
 
 import {
@@ -65,12 +65,31 @@ function SigninScreen() {
     event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((auth) => {
-        if (auth) {
-          setIsLoggedIn(true);
-        }
+        setIsLoggedIn(true);
+        setUserData({ details: auth.user, favorites: [] });
       })
       .catch((error) => alert(error.message));
   };
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        console.log(user);
+        let userFavBanks = [];
+        setIsLoggedIn(true);
+        const userFavRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(userFavRef);
+        if (docSnap.exists()) {
+          userFavBanks = JSON.parse(docSnap.data().favorites);
+        }
+        console.log(userFavBanks);
+        setUserData({ details: user, favorites: userFavBanks });
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  }, []);
 
   return (
     <div className="signin_screen">
