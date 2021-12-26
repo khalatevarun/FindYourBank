@@ -7,6 +7,8 @@ import { myLocalStorage } from '../localStorageWrapper';
 export const MyContext = createContext(null);
 
 export const MyProvider = ({ children }) => {
+  const [isLoggedin, setIsLoggedIn] = useState(false);
+
   const [userData, setUserData] = useState({
     favorites: [],
   });
@@ -49,6 +51,8 @@ export const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        isLoggedin,
+        setIsLoggedIn,
         userData,
         banksData,
         setBanksData,
