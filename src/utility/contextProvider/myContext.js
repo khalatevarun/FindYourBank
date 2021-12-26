@@ -1,7 +1,8 @@
 import { message } from 'antd';
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
+import { myLocalStorage } from '../localStorageWrapper';
 
 export const MyContext = createContext(null);
 
@@ -16,7 +17,13 @@ export const MyProvider = ({ children }) => {
   });
 
   const addToFavorites = (bankObj) => {
-    setUserData({ favorites: [...get(userData, 'favorites'), bankObj] });
+    let favoriteBanks = [...get(userData, 'favorites'), bankObj];
+    setUserData({ favorites: favoriteBanks });
+    myLocalStorage.setItem(
+      'favoriteBanks',
+      JSON.stringify(favoriteBanks),
+      12000000
+    );
     message.success('Bank added to favorites.');
   };
 
@@ -28,8 +35,16 @@ export const MyProvider = ({ children }) => {
     setUserData({
       favorites: newData,
     });
+    myLocalStorage.setItem('favoriteBanks', JSON.stringify(newData), 12000000);
     message.success('Bank removed from favorites.');
   };
+
+  useEffect(() => {
+    let favoritesFromLocalStorage = myLocalStorage.getItem('favoriteBanks');
+    if (favoritesFromLocalStorage) {
+      setUserData({ favorites: JSON.parse(favoritesFromLocalStorage) });
+    }
+  }, []);
 
   return (
     <MyContext.Provider
