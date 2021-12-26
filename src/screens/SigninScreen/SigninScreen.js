@@ -46,10 +46,17 @@ function SigninScreen() {
   };
 
   const signInAsGuest = (event) => {
+    let userFavBanks = [];
     event.preventDefault();
     signInWithEmailAndPassword(auth, 'test@gmail.com', 'password')
       .then(async (auth) => {
         setIsLoggedIn(true);
+        const userFavRef = doc(db, 'users', auth.user.uid);
+        const docSnap = await getDoc(userFavRef);
+        if (docSnap.exists()) {
+          userFavBanks = JSON.parse(docSnap.data().favorites);
+        }
+        setUserData({ details: auth.user, favorites: userFavBanks });
       })
       .catch((error) => alert(error.message));
   };
