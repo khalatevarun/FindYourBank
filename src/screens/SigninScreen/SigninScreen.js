@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Col, Row, Spin, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 
 import {
   createUserWithEmailAndPassword,
@@ -8,15 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import {
-  collection,
-  setDoc,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { useMyContext } from '../../utility/contextProvider/myContext';
 import { db } from '../../firebase';
 import './style.scss';

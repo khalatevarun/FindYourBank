@@ -18,38 +18,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-.app__container > form > h5 {
-  margin-bottom: 5px;
-}
-.app__container > form > input {
-  height: 30px;
-  margin-bottom: 10px;
-  background-color: white;
-  width: 98%;
-}
-
-.app__container > p {
-  margin-top: 15px;
-  font-size: 12px;
-}
-
-.app_singInButton {
-  background: #222;
-  border-radius: 2px;
-  width: 100%;
-  height: 30px;
-  color: white;
-  margin-top: 10px;
-}
-
-.app_registerButton {
-  border-radius: 2px;
-  width: 100%;
-  height: 30px;
-  border: 1px solid;
-  margin-top: 10px;
-  border-color: darkgray;
-}
 .signin_form_container {
   display: flex;
   justify-content: center;
