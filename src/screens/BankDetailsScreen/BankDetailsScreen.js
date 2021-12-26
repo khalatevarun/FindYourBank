@@ -1,25 +1,44 @@
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
-import { Col, Popconfirm, Row } from 'antd';
+import { Col, message, Popconfirm, Row } from 'antd';
 import find from 'lodash/find';
 import get from 'lodash/get';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useMyContext } from '../../utility/contextProvider/myContext';
+import { myLocalStorage } from '../../utility/localStorageWrapper';
 import './style.scss';
 
 const BankDetailsScreen = () => {
   let { ifsc } = useParams();
+  const navigate = useNavigate();
 
   const { addToFavorites, removeFromFavorites, banksData, userData } =
     useMyContext();
 
-  const currentBankObject = find(
-    get(banksData, 'initialData'),
-    function (bank) {
-      return get(bank, 'ifsc') === ifsc;
-    }
-  );
+  const [currentBankObject, setCurrentBankObject] = useState({});
 
-  console.log(userData);
+  useEffect(() => {
+    if (ifsc) {
+      const findBank = find(get(banksData, 'initialData'), function (bank) {
+        return get(bank, 'ifsc') === ifsc;
+      });
+      if (findBank) {
+        setCurrentBankObject(findBank);
+        myLocalStorage.setItem(ifsc, JSON.stringify(findBank), 60000);
+      } else if (myLocalStorage.getItem(ifsc)) {
+        setCurrentBankObject(JSON.parse(myLocalStorage.getItem(ifsc)));
+      } else {
+        // link to  all bank details
+        message.error(
+          'Please select a city and search for the bank with ifsc code'
+        );
+        navigate('/all-banks');
+      }
+    } else {
+      navigate('/all-banks');
+    }
+  }, []);
+
   return (
     <>
       <div className="screen-title">Bank Details</div>

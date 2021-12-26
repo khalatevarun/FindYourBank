@@ -51,7 +51,7 @@ const AllBanksScreen = () => {
       newData = filter(get(banksData, 'initialData'), (bank) => {
         let searchObject = JSON.stringify(bank);
 
-        includes(searchObject.toLowerCase(), query.toLowerCase());
+        return includes(searchObject.toLowerCase(), query.toLowerCase());
       });
     }
 
