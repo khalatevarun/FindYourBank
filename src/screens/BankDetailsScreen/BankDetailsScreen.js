@@ -2,7 +2,6 @@ import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { Col, Popconfirm, Row } from 'antd';
 import find from 'lodash/find';
 import get from 'lodash/get';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMyContext } from '../../utility/contextProvider/myContext';
 import './style.scss';

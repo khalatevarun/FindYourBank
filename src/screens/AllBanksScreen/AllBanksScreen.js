@@ -34,23 +34,27 @@ const AllBanksScreen = () => {
     setBanksData,
   } = useMyContext();
 
-  console.log({
-    userData,
-    addToFavorites,
-    removeFromFavorites,
-    banksData,
-    setBanksData,
-  });
-
   const searchBanks = (query) => {
-    let newData = filter(
-      get(banksData, 'initialData'),
-      (bank) =>
-        includes(
-          String(bank[categorySelected]).toLowerCase(),
-          query.toLowerCase()
-        ) // BANK_ID needs to be converted to string for includes function to work
-    );
+    let newData;
+    if (categorySelected) {
+      newData = filter(
+        get(banksData, 'initialData'),
+        (bank) =>
+          includes(
+            String(bank[categorySelected]).toLowerCase(),
+            query.toLowerCase()
+          ) // BANK_ID needs to be converted to string for includes function to work
+      );
+    } else {
+      // if no category is selected then json.stringify the whole object and search in it everywhere
+
+      newData = filter(get(banksData, 'initialData'), (bank) => {
+        let searchObject = JSON.stringify(bank);
+
+        includes(searchObject.toLowerCase(), query.toLowerCase());
+      });
+    }
+
     setBanksData({ ...banksData, filteredData: newData });
   };
 
