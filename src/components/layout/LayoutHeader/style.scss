@@ -3,5 +3,12 @@
   padding: 0px 60px !important;
   line-height: normal;
   padding-top: 10px !important;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  font-size: x-large;
+  font-weight: 800;
 }
