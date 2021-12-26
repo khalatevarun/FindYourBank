@@ -50,3 +50,21 @@ h1 {
   margin-top: 10px;
   border-color: darkgray;
 }
+.signin_form_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button_container {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
+.signin_screen {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}

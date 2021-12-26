@@ -17,7 +17,7 @@ import { db } from '../../firebase';
 export const MyContext = createContext(null);
 
 export const MyProvider = ({ children }) => {
-  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [userData, setUserData] = useState({
     details: {},
@@ -67,7 +67,7 @@ export const MyProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
-        isLoggedin,
+        isLoggedIn,
         setIsLoggedIn,
         userData,
         setUserData,
