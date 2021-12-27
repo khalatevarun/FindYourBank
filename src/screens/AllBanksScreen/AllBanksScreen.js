@@ -19,6 +19,7 @@ import './style.scss';
 import { getAllBanksData } from '../../utility/api/banksDataAPI';
 import { myLocalStorage } from '../../utility/localStorageWrapper';
 import { useMyContext } from '../../utility/contextProvider/myContext';
+import { citiesInIndia } from '../../constants/cityData';
 
 const { Option } = Select;
 const AllBanksScreen = () => {
@@ -80,12 +81,13 @@ const AllBanksScreen = () => {
           <Row align="end">
             <Space>
               <Select
+                showSearch
                 value={citySelected}
                 onChange={(value) => setCitySelected(value)}
               >
-                {map(cities, (city, i) => (
-                  <Option key={i} value={get(city, 'value')}>
-                    {get(city, 'label')}
+                {map(citiesInIndia, (city, i) => (
+                  <Option key={i} value={city.toUpperCase()}>
+                    {city}
                   </Option>
                 ))}
               </Select>

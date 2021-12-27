@@ -1,0 +1,38 @@
+h1 {
+  color: white;
+}
+
+.app__container {
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  background-color: white;
+}
+
+.app__container > h1 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.signin_form_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button_container {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+}
+.signin_screen {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
